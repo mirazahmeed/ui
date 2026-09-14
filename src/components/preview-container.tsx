@@ -7,9 +7,14 @@ import { CopyButton } from "./copy-button";
 export interface PreviewContainerProps {
   children: React.ReactNode;
   codeToCopy?: string;
+  minHeight?: string;
 }
 
-export function PreviewContainer({ children, codeToCopy }: PreviewContainerProps) {
+export function PreviewContainer({
+  children,
+  codeToCopy,
+  minHeight = "min-h-[500px] sm:min-h-[540px]",
+}: PreviewContainerProps) {
   const [viewport, setViewport] = useState<"desktop" | "tablet" | "mobile">("desktop");
   const [remountKey, setRemountKey] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -80,7 +85,7 @@ export function PreviewContainer({ children, codeToCopy }: PreviewContainerProps
       </div>
 
       <div
-        className={`w-full relative min-h-[420px] border border-border rounded-xl bg-muted/20 dark:bg-zinc-900/30 flex items-center justify-center p-6 sm:p-8 overflow-hidden transition-all duration-300 ${
+        className={`w-full relative ${minHeight} border border-border rounded-xl bg-muted/20 dark:bg-zinc-900/30 flex items-center justify-center p-6 sm:p-8 overflow-hidden transition-all duration-300 ${
           isFullscreen ? "flex-1 rounded-xl" : ""
         }`}
       >

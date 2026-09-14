@@ -29,7 +29,7 @@ export function renderComponentPreview(slug: string) {
     case "animated-tabs":
       return <AnimatedTabs />;
     case "video-player":
-      return <VideoPlayer />;
+      return <VideoPlayer src="/service-total-revamp.webm" />;
     case "audio-player":
       return <AudioPlayer />;
     case "cycle-status-button":

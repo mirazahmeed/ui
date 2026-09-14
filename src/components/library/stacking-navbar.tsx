@@ -65,7 +65,7 @@ export function StackingNavbar({
                 onClick={(e) => e.preventDefault()}
                 className="flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium
                   bg-zinc-900/90 hover:bg-zinc-800 text-zinc-100 hover:text-white
-                  dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-900
+                  dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-900 dark:hover:text-black
                   border border-zinc-700/50 dark:border-zinc-300/50
                   shadow-lg shadow-black/10 backdrop-blur-md
                   transition-all duration-200 cursor-pointer whitespace-nowrap"

@@ -17,7 +17,7 @@ export interface VideoPlayerProps {
 }
 
 export function VideoPlayer({
-  src = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+  src = "/service-total-revamp.webm",
 }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
