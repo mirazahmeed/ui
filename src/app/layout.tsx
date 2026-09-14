@@ -42,6 +42,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
+      data-scroll-behavior="smooth"
     >
       <head>
         <script
@@ -50,7 +51,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-background text-foreground font-sans">
+      <body
+        className="min-h-screen flex flex-col bg-background text-foreground font-sans"
+        suppressHydrationWarning
+      >
         <SiteHeader />
         <div className="w-full max-w-[1440px] mx-auto flex flex-1 min-h-0">
           <aside className="hidden md:flex w-[260px] shrink-0 sticky top-14 h-[calc(100vh-3.5rem)] border-r border-border bg-background">
