@@ -10,6 +10,13 @@ import "prismjs/components/prism-bash";
 import { CopyButton } from "./copy-button";
 import { ChevronDown, ChevronUp, FileCode2 } from "lucide-react";
 
+if (typeof window !== "undefined") {
+  (window as unknown as { Prism?: { manual?: boolean } }).Prism =
+    (window as unknown as { Prism?: { manual?: boolean } }).Prism || {};
+  (window as unknown as { Prism: { manual: boolean } }).Prism.manual = true;
+}
+Prism.manual = true;
+
 export interface CodeBlockProps {
   code: string;
   language?: string;
@@ -60,8 +67,12 @@ export function CodeBlock({ code, language = "tsx", fileName, maxHeight = "480px
             ))}
           </div>
           <div className="py-4 pl-4 pr-4 flex-1 min-w-0 overflow-x-auto">
-            <pre className="!bg-transparent !p-0 !m-0">
-              <code className={`language-${language} leading-6 block`} dangerouslySetInnerHTML={{ __html: highlightedCode }} />
+            <pre className="!bg-transparent !p-0 !m-0" tabIndex={0} suppressHydrationWarning>
+              <code
+                className={`language-${language} leading-6 block`}
+                dangerouslySetInnerHTML={{ __html: highlightedCode }}
+                suppressHydrationWarning
+              />
             </pre>
           </div>
         </div>
