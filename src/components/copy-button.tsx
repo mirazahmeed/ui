@@ -10,12 +10,7 @@ export interface CopyButtonProps {
   showText?: boolean;
 }
 
-export function CopyButton({
-  text,
-  className = "",
-  label = "Copy",
-  showText = true,
-}: CopyButtonProps) {
+export function CopyButton({ text, className = "", label = "Copy", showText = true }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async (e: React.MouseEvent) => {
@@ -33,25 +28,22 @@ export function CopyButton({
     <button
       onClick={handleCopy}
       type="button"
-      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium transition-all duration-150 cursor-pointer select-none
-        bg-zinc-100 hover:bg-zinc-200 text-zinc-700
-        dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-300
-        border border-zinc-200 dark:border-zinc-700/60
-        active:scale-95 ${className}`}
-      aria-label={copied ? "Copied to clipboard" : "Copy to clipboard"}
+      className={`inline-flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer select-none border shadow-xs
+        ${
+          copied
+            ? "bg-emerald-500 text-white border-emerald-600 dark:bg-emerald-600 dark:border-emerald-700"
+            : "bg-card hover:bg-muted text-foreground border-border"
+        } active:scale-[0.98] ${className}`}
+      aria-label={copied ? "Copied" : "Copy to clipboard"}
     >
       {copied ? (
         <>
-          <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 stroke-[2.5]" />
-          {showText && (
-            <span className="text-emerald-600 dark:text-emerald-400 font-semibold">
-              Copied ✓
-            </span>
-          )}
+          <Check className="w-3.5 h-3.5" />
+          {showText && <span>Copied</span>}
         </>
       ) : (
         <>
-          <Copy className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400" />
+          <Copy className="w-3.5 h-3.5 text-muted-foreground" />
           {showText && <span>{label}</span>}
         </>
       )}

@@ -43,22 +43,23 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground font-sans">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');var m=window.matchMedia('(prefers-color-scheme:dark)').matches;if(t==='dark'||(!t&&m))document.documentElement.classList.add('dark');}catch(e){}})();`,
+          }}
+        />
+      </head>
+      <body className="min-h-screen flex flex-col bg-background text-foreground font-sans">
         <SiteHeader />
-
-        <div className="w-full max-w-6xl mx-auto lg:border-x border-zinc-200 dark:border-zinc-800 flex flex-1">
-          {/* Desktop Left Sidebar */}
-          <aside className="hidden md:flex w-64 min-w-[240px] max-w-[260px] border-r border-zinc-200 dark:border-zinc-800 sticky top-13 h-[calc(100vh-3.25rem)]">
+        <div className="w-full max-w-[1440px] mx-auto flex flex-1 min-h-0">
+          <aside className="hidden md:flex w-[260px] shrink-0 sticky top-14 h-[calc(100vh-3.5rem)] border-r border-border bg-background">
             <ComponentSidebar />
           </aside>
-
-          {/* Main Content Area */}
-          <main className="flex-1 min-w-0 px-4 sm:px-8">
+          <main className="flex-1 min-w-0 px-5 sm:px-6 lg:px-8 py-2">
             {children}
           </main>
         </div>
-
-        {/* Mobile floating component switcher */}
         <MobileNav />
       </body>
     </html>

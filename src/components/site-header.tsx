@@ -1,36 +1,44 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { Search, Sun, Moon } from "lucide-react";
 import { GithubIcon, TwitterIcon } from "@/components/icons";
 import { COMPONENTS } from "@/data/components";
 import { useRouter } from "next/navigation";
 
+function useTheme() {
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("theme") as "light" | "dark" | null;
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const initial = stored ?? (prefersDark ? "dark" : "light");
+    document.documentElement.classList.toggle("dark", initial === "dark");
+    queueMicrotask(() => {
+      setTheme(initial);
+      setMounted(true);
+    });
+  }, []);
+
+  const toggle = useCallback(() => {
+    setTheme((prev) => {
+      const next = prev === "dark" ? "light" : "dark";
+      document.documentElement.classList.toggle("dark", next === "dark");
+      localStorage.setItem("theme", next);
+      return next;
+    });
+  }, []);
+
+  return { theme, toggle, mounted };
+}
+
 export function SiteHeader() {
   const router = useRouter();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    const isDarkMode =
-      document.documentElement.classList.contains("dark") ||
-      window.matchMedia("(prefers-color-scheme: dark)").matches;
-    if (isDarkMode) {
-      document.documentElement.classList.add("dark");
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    const nextDark = !isDark;
-    setIsDark(nextDark);
-    if (nextDark) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  };
+  const { theme, toggle, mounted } = useTheme();
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -45,56 +53,59 @@ export function SiteHeader() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const searchResults = COMPONENTS.filter((c) =>
-    c.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    c.category.toLowerCase().includes(searchQuery.toLowerCase())
+  useEffect(() => {
+    if (isSearchOpen) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isSearchOpen]);
+
+  const searchResults = COMPONENTS.filter(
+    (c) =>
+      c.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      c.category.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
     <>
-      <header className="w-full border-b border-zinc-200 dark:border-zinc-800 bg-background/95 backdrop-blur-md sticky top-0 z-40">
-        <div className="w-full mx-auto max-w-6xl px-4 lg:border-x border-zinc-200 dark:border-zinc-800 h-13 flex items-center justify-between">
-          {/* Brand Logo */}
-          <div className="flex items-center gap-6">
-            <Link
-              href="/"
-              className="flex items-center gap-2 group cursor-pointer"
-            >
-              <div className="w-6 h-6 rounded-md bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 flex items-center justify-center font-bold text-xs tracking-wider shadow-sm group-hover:scale-105 transition-transform">
+      <header className="w-full border-b border-border bg-background/80 backdrop-blur-xl sticky top-0 z-40 supports-[backdrop-filter]:bg-background/80">
+        <div className="w-full mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-6 shrink-0">
+            <Link href="/" className="flex items-center gap-2.5 group">
+              <div className="w-7 h-7 rounded-lg bg-foreground text-background flex items-center justify-center font-bold text-xs tracking-wider shadow-sm group-hover:scale-105 transition-transform">
                 C
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="font-semibold text-sm tracking-tight text-foreground">
                   craft/ui
                 </span>
-                <span className="text-[10px] uppercase font-mono px-1.5 py-0.2 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-500 font-medium">
+                <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded-md bg-muted text-muted-foreground font-medium border border-border">
                   Free
                 </span>
               </div>
             </Link>
           </div>
 
-          {/* Center Search Trigger */}
-          <div className="flex-1 max-w-xs mx-4 hidden md:block">
+          <div className="flex-1 max-w-sm mx-4 hidden md:block">
             <button
               onClick={() => setIsSearchOpen(true)}
-              className="w-full flex items-center justify-between px-3 py-1.5 text-xs rounded-lg bg-zinc-100/70 dark:bg-zinc-800/70 border border-zinc-200 dark:border-zinc-700/60 text-zinc-500 dark:text-zinc-400 hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors cursor-pointer"
+              className="w-full flex items-center justify-between gap-3 px-3 py-2 text-xs rounded-lg bg-muted/70 border border-border text-muted-foreground hover:bg-muted hover:border-border-strong hover:text-foreground transition-colors cursor-pointer"
             >
-              <span className="flex items-center gap-2">
-                <Search className="w-3.5 h-3.5" />
-                <span>Search components...</span>
+              <span className="flex items-center gap-2 min-w-0">
+                <Search className="w-3.5 h-3.5 shrink-0" />
+                <span className="truncate">Search components...</span>
               </span>
-              <kbd className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-white dark:bg-zinc-700 text-zinc-500 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-600 shadow-2xs">
+              <kbd className="hidden sm:inline-flex font-mono text-[10px] px-1.5 py-0.5 rounded-md bg-card text-muted-foreground border border-border shadow-xs shrink-0">
                 ⌘K
               </kbd>
             </button>
           </div>
 
-          {/* Right Links & Theme Toggle */}
-          <div className="flex items-center gap-1 sm:gap-2 text-xs font-medium">
+          <div className="flex items-center gap-1 shrink-0">
             <button
               onClick={() => setIsSearchOpen(true)}
-              className="md:hidden p-2 rounded-lg text-zinc-500 hover:text-foreground"
+              className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
               aria-label="Search"
             >
               <Search className="w-4 h-4" />
@@ -104,28 +115,32 @@ export function SiteHeader() {
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-zinc-600 dark:text-zinc-400 hover:text-foreground hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+              className="hidden sm:flex items-center gap-1.5 px-2.5 py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors text-xs font-medium"
             >
               <GithubIcon className="w-4 h-4" />
-              <span className="hidden sm:inline">GitHub</span>
+              GitHub
             </a>
 
             <a
               href="https://x.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-zinc-600 dark:text-zinc-400 hover:text-foreground hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+              className="hidden sm:flex items-center gap-1.5 px-2.5 py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors text-xs font-medium"
             >
               <TwitterIcon className="w-4 h-4" />
-              <span className="hidden sm:inline">Twitter</span>
+              Twitter
             </a>
 
+            <div className="w-px h-5 bg-border mx-1 hidden sm:block" />
+
             <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg text-zinc-600 dark:text-zinc-400 hover:text-foreground hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer ml-1"
+              onClick={toggle}
+              className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted border border-transparent hover:border-border transition-colors cursor-pointer"
               aria-label="Toggle theme"
             >
-              {isDark ? (
+              {!mounted ? (
+                <span className="w-4 h-4 block" />
+              ) : theme === "dark" ? (
                 <Sun className="w-4 h-4" />
               ) : (
                 <Moon className="w-4 h-4" />
@@ -135,27 +150,26 @@ export function SiteHeader() {
         </div>
       </header>
 
-      {/* Search Modal */}
       {isSearchOpen && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4">
+        <div className="fixed inset-0 z-50 flex items-start justify-center pt-[20vh] px-4">
           <div
-            className="fixed inset-0 bg-black/50 backdrop-blur-xs"
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm"
             onClick={() => setIsSearchOpen(false)}
           />
-          <div className="relative w-full max-w-lg rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-2xl overflow-hidden z-10">
-            <div className="flex items-center gap-2 p-3.5 border-b border-zinc-100 dark:border-zinc-800">
-              <Search className="w-4 h-4 text-zinc-400" />
+          <div className="relative w-full max-w-lg rounded-2xl bg-card border border-border shadow-2xl overflow-hidden z-10">
+            <div className="flex items-center gap-3 px-4 py-3 border-b border-border">
+              <Search className="w-4 h-4 text-muted-foreground shrink-0" />
               <input
                 type="text"
                 autoFocus
-                placeholder="Type to search component..."
+                placeholder="Search components, categories..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-transparent text-sm text-foreground outline-none placeholder-zinc-400"
+                className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
               />
               <button
                 onClick={() => setIsSearchOpen(false)}
-                className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-500"
+                className="text-[10px] font-mono px-1.5 py-1 rounded-md bg-muted text-muted-foreground border border-border shrink-0"
               >
                 ESC
               </button>
@@ -163,8 +177,8 @@ export function SiteHeader() {
 
             <div className="max-h-80 overflow-y-auto p-2">
               {searchResults.length === 0 ? (
-                <p className="p-4 text-center text-xs text-zinc-400">
-                  No components found.
+                <p className="p-6 text-center text-sm text-muted-foreground">
+                  No components found for “{searchQuery}”
                 </p>
               ) : (
                 searchResults.map((c) => (
@@ -174,17 +188,17 @@ export function SiteHeader() {
                       router.push(`/components/${c.slug}`);
                       setIsSearchOpen(false);
                     }}
-                    className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-left cursor-pointer"
+                    className="w-full flex items-center justify-between gap-3 p-3 rounded-xl hover:bg-muted transition-colors text-left cursor-pointer group"
                   >
-                    <div>
-                      <p className="text-xs font-semibold text-zinc-900 dark:text-zinc-100">
+                    <div className="min-w-0">
+                      <p className="text-sm font-medium text-foreground truncate">
                         {c.title}
                       </p>
-                      <p className="text-[11px] text-zinc-500 line-clamp-1">
+                      <p className="text-xs text-muted-foreground truncate">
                         {c.description}
                       </p>
                     </div>
-                    <span className="text-[10px] text-zinc-400 uppercase font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800">
+                    <span className="text-[10px] text-muted-foreground uppercase font-mono px-2 py-1 rounded-md bg-muted border border-border shrink-0 group-hover:bg-card transition-colors">
                       {c.category}
                     </span>
                   </button>

@@ -9,17 +9,10 @@ export interface PreviewContainerProps {
   codeToCopy?: string;
 }
 
-export function PreviewContainer({
-  children,
-  codeToCopy,
-}: PreviewContainerProps) {
+export function PreviewContainer({ children, codeToCopy }: PreviewContainerProps) {
   const [viewport, setViewport] = useState<"desktop" | "tablet" | "mobile">("desktop");
   const [remountKey, setRemountKey] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
-
-  const reset = () => {
-    setRemountKey((prev) => prev + 1);
-  };
 
   const getViewportWidth = () => {
     switch (viewport) {
@@ -33,92 +26,66 @@ export function PreviewContainer({
   };
 
   return (
-    <div className={`my-4 ${isFullscreen ? "fixed inset-0 z-50 bg-background p-6 flex flex-col" : "relative"}`}>
-      {/* Top Toolbar */}
-      <div className="flex items-center justify-between pb-3">
-        <h2 className="text-lg font-semibold tracking-tight text-foreground flex items-center gap-2">
-          Preview
-        </h2>
+    <div className={isFullscreen ? "fixed inset-0 z-50 bg-background p-4 sm:p-6 flex flex-col" : "relative"}>
+      <div className="flex items-center justify-between gap-3 pb-3">
+        <h2 className="text-sm font-semibold tracking-tight text-foreground">Preview</h2>
 
-        <div className="flex items-center gap-2">
-          {/* Viewport Toggles */}
-          <div className="hidden sm:flex items-center bg-zinc-100 dark:bg-zinc-800/80 p-0.5 rounded-lg border border-zinc-200 dark:border-zinc-700/60">
-            <button
-              onClick={() => setViewport("desktop")}
-              className={`p-1.5 rounded-md transition-colors ${
-                viewport === "desktop"
-                  ? "bg-white dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 shadow-2xs"
-                  : "text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200"
-              }`}
-              title="Desktop view"
-            >
-              <Monitor className="w-3.5 h-3.5" />
-            </button>
-            <button
-              onClick={() => setViewport("tablet")}
-              className={`p-1.5 rounded-md transition-colors ${
-                viewport === "tablet"
-                  ? "bg-white dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 shadow-2xs"
-                  : "text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200"
-              }`}
-              title="Tablet view (640px)"
-            >
-              <Tablet className="w-3.5 h-3.5" />
-            </button>
-            <button
-              onClick={() => setViewport("mobile")}
-              className={`p-1.5 rounded-md transition-colors ${
-                viewport === "mobile"
-                  ? "bg-white dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 shadow-2xs"
-                  : "text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200"
-              }`}
-              title="Mobile view (380px)"
-            >
-              <Smartphone className="w-3.5 h-3.5" />
-            </button>
+        <div className="flex items-center gap-1.5">
+          <div className="hidden sm:flex items-center p-1 rounded-lg bg-muted border border-border">
+            {([
+              ["desktop", Monitor, "Desktop"],
+              ["tablet", Tablet, "Tablet 640px"],
+              ["mobile", Smartphone, "Mobile 380px"],
+            ] as const).map(([key, Icon, label]) => (
+              <button
+                key={key}
+                onClick={() => setViewport(key)}
+                className={`p-1.5 rounded-md transition-colors cursor-pointer ${
+                  viewport === key
+                    ? "bg-card text-foreground shadow-sm border border-border"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+                title={label}
+                aria-label={label}
+              >
+                <Icon className="w-3.5 h-3.5" />
+              </button>
+            ))}
           </div>
 
-          {/* Reset Preview */}
           <button
-            onClick={reset}
-            className="p-1.5 rounded-md text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/60 transition-colors"
-            title="Replay / Reset Component"
+            onClick={() => setRemountKey((k) => k + 1)}
+            className="p-2 rounded-lg bg-muted border border-border text-muted-foreground hover:text-foreground hover:bg-card transition-colors cursor-pointer"
+            title="Reset preview"
+            aria-label="Reset preview"
           >
             <RotateCcw className="w-3.5 h-3.5" />
           </button>
 
-          {/* Fullscreen Toggle */}
           <button
             onClick={() => setIsFullscreen(!isFullscreen)}
-            className="p-1.5 rounded-md text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/60 transition-colors"
-            title={isFullscreen ? "Exit Fullscreen" : "Fullscreen Preview"}
+            className="p-2 rounded-lg bg-muted border border-border text-muted-foreground hover:text-foreground hover:bg-card transition-colors cursor-pointer"
+            title={isFullscreen ? "Exit fullscreen" : "Fullscreen"}
+            aria-label={isFullscreen ? "Exit fullscreen" : "Fullscreen"}
           >
-            {isFullscreen ? (
-              <Minimize2 className="w-3.5 h-3.5" />
-            ) : (
-              <Maximize2 className="w-3.5 h-3.5" />
-            )}
+            {isFullscreen ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
           </button>
 
-          {/* Copy Code */}
           {codeToCopy && (
-            <div className="hidden sm:block">
-              <CopyButton text={codeToCopy} label="Copy Component" />
+            <div className="hidden sm:block ml-1">
+              <CopyButton text={codeToCopy} label="Copy" />
             </div>
           )}
         </div>
       </div>
 
-      {/* Canvas Area */}
       <div
-        className={`w-full relative min-h-[440px] border border-zinc-200 dark:border-zinc-800 rounded-2xl
-          bg-zinc-50/50 dark:bg-zinc-950/50
-          flex items-center justify-center p-6 overflow-hidden transition-all duration-300
-          ${isFullscreen ? "flex-1" : ""}`}
+        className={`w-full relative min-h-[420px] border border-border rounded-xl bg-muted/20 dark:bg-zinc-900/30 flex items-center justify-center p-6 sm:p-8 overflow-hidden transition-all duration-300 ${
+          isFullscreen ? "flex-1 rounded-xl" : ""
+        }`}
       >
-        {/* Subtle grid texture */}
         <div
-          className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none"
+          className="absolute inset-0 opacity-[0.04] dark:opacity-[0.06] pointer-events-none"
           style={{
             backgroundImage: `radial-gradient(currentColor 1px, transparent 1px)`,
             backgroundSize: "20px 20px",
