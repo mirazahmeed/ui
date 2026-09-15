@@ -26,12 +26,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: comp.title,
+    title: `${comp.title} - React Component`,
     description: comp.description,
     openGraph: {
-      title: `${comp.title} - React Component | craft/ui`,
+      title: `${comp.title} - React Component | MirazAhmed UI`,
       description: comp.description,
       type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${comp.title} - React Component | MirazAhmed UI`,
+      description: comp.description,
     },
   };
 }

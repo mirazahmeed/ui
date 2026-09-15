@@ -1,0 +1,10 @@
+<svg width="135" height="135" viewBox="0 0 135 135" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="135" height="135" rx="30" fill="black"/>
+  <!-- Main bold M monogram -->
+  <path d="M28 101V34L67.5 72.5L107 34V101" stroke="white" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Geometric architectural grid lines in Chetan Verma style -->
+  <path d="M28 34L67.5 50L107 34" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+  <path d="M67.5 72.5V101" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+  <path d="M28 101L67.5 72.5L107 101" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+  <circle cx="67.5" cy="72.5" r="2.5" fill="white" opacity="0.9"/>
+</svg>

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Search, Sun, Moon } from "lucide-react";
 import { GithubIcon, TwitterIcon } from "@/components/icons";
 import { COMPONENTS } from "@/data/components";
@@ -73,17 +74,16 @@ export function SiteHeader() {
         <div className="w-full mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4">
           <div className="flex items-center gap-6 shrink-0">
             <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="w-7 h-7 rounded-lg bg-foreground text-background flex items-center justify-center font-bold text-xs tracking-wider shadow-sm group-hover:scale-105 transition-transform">
-                C
-              </div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-semibold text-sm tracking-tight text-foreground">
-                  craft/ui
-                </span>
-                <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded-md bg-muted text-muted-foreground font-medium border border-border">
-                  Free
-                </span>
-              </div>
+              <Image
+                src="/logo.svg"
+                alt="mirazahmed/ui."
+                width={26}
+                height={26}
+                className="w-6.5 h-6.5 rounded-lg shadow-xs group-hover:scale-105 transition-transform shrink-0"
+              />
+              <span className="font-semibold text-sm tracking-tight text-foreground">
+                mirazahmed/ui.
+              </span>
             </Link>
           </div>
 
@@ -112,7 +112,7 @@ export function SiteHeader() {
             </button>
 
             <a
-              href="https://github.com"
+              href="https://github.com/mirazahmeed/ui"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:flex items-center gap-1.5 px-2.5 py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors text-xs font-medium"

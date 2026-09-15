@@ -81,7 +81,7 @@ export function ComponentSidebar() {
         <h5 className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest">Community</h5>
         <div className="flex flex-col gap-1">
           <a
-            href="https://github.com"
+            href="https://github.com/mirazahmeed/ui"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors py-1.5 px-2 -mx-2 rounded-lg hover:bg-muted"

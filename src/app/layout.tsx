@@ -16,21 +16,62 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://mirazahmed-ui.vercel.app"
+  ),
   title: {
-    default: "craft/ui - Free Production React Components",
-    template: "%s | craft/ui",
+    default: "Stacking Navbar - React Component | MirazAhmed UI",
+    template: "%s | MirazAhmed UI",
   },
   description:
-    "A clean, developer-focused React component playground. Discover, test live interactions, inspect source code, and copy-paste directly into your project. Free and zero setup.",
+    "A collection of beautiful, animated, and responsive design components built with React, Tailwind CSS, and Framer Motion.",
+  applicationName: "mirazahmed/ui.",
+  authors: [{ name: "Miraz Ahmed", url: "https://github.com/mirazahmeed" }],
+  creator: "Miraz Ahmed",
+  publisher: "MirazAhmed UI",
   keywords: [
+    "Stacking Navbar",
     "React components",
     "Tailwind CSS",
     "Framer Motion",
     "UI playground",
+    "mirazahmed/ui",
     "Open source UI",
     "Copy paste components",
   ],
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32", type: "image/x-icon" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: "/favicon.ico",
+  },
+  manifest: "/manifest.json",
+  openGraph: {
+    title: "Stacking Navbar - React Component | MirazAhmed UI",
+    description:
+      "A collection of beautiful, animated, and responsive design components built with React, Tailwind CSS, and Framer Motion.",
+    siteName: "mirazahmed/ui.",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "MirazAhmed UI",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Stacking Navbar - React Component | MirazAhmed UI",
+    description:
+      "A collection of beautiful, animated, and responsive design components built with React, Tailwind CSS, and Framer Motion.",
+    images: ["/opengraph-image.png"],
+  },
 };
+
 
 export default function RootLayout({
   children,

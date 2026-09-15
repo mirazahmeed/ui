@@ -1,0 +1,26 @@
+{
+  "name": "MirazAhmed UI",
+  "short_name": "mirazahmed/ui.",
+  "description": "A collection of beautiful, animated, and responsive design components built with React, Tailwind CSS, and Framer Motion.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#09090b",
+  "theme_color": "#09090b",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
