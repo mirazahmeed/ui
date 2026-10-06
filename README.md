@@ -82,49 +82,19 @@ The library includes 14+ handcrafted components organized into 5 categories:
 
 ---
 
-## 🚀 Getting Started
+## 🚀 How to Use Components
 
-### Prerequisites
+### 1. Install dependencies
 
-- **Node.js** 18.17 or later
-- **npm**, **pnpm**, **yarn**, or **bun**
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/mirazahmeed/ui.git
-cd ui
-```
-
-### 2. Install dependencies
-
-```bash
-npm install
-```
-
-### 3. Run the development server
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
-
----
-
-## 📦 How to Use Components in Your Project
-
-### 1. Install common dependencies
-
-Most animated components rely on `framer-motion`, `lucide-react`, and utility classes:
+Most components use `framer-motion`, `lucide-react`, and utility helpers. Install them in your project:
 
 ```bash
 npm install framer-motion lucide-react clsx tailwind-merge
 ```
 
-### 2. Add the `cn` utility
+### 2. Add the `cn` helper
 
-In your project, create `lib/utils.ts` (if you don't already have one):
+In your project, add `lib/utils.ts` (if you don't already have it):
 
 ```typescript
 import { clsx, type ClassValue } from "clsx";
@@ -135,11 +105,11 @@ export function cn(...inputs: ClassValue[]) {
 }
 ```
 
-### 3. Copy the component
+### 3. Copy & paste any component
 
-1. Browse to any component on [mirazahmed-ui.vercel.app](https://mirazahmed-ui.vercel.app) or in `src/components/library/`.
-2. Click **Copy** in the code block.
-3. Paste into your project's component directory (e.g. `components/ui/stacking-navbar.tsx`).
+1. Browse the component gallery on [mirazahmed-ui.vercel.app](https://mirazahmed-ui.vercel.app) (or under `src/components/library/`).
+2. Click **Copy** on the component code.
+3. Paste directly into your project (e.g. `components/ui/stacking-navbar.tsx`).
 
 ---
 
@@ -184,17 +154,6 @@ ui/
 ├── package.json
 └── tsconfig.json
 ```
-
----
-
-## 📜 Available Scripts
-
-| Command | Action |
-| :--- | :--- |
-| `npm run dev` | Runs the Next.js development server on `localhost:3000` |
-| `npm run build` | Builds the production bundle |
-| `npm run start` | Starts the production server |
-| `npm run lint` | Runs ESLint to check for code issues |
 
 ---
 
