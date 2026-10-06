@@ -7,7 +7,7 @@
   </p>
 
   <p align="center">
-    <a href="https://mirazahmed-ui.vercel.app" target="_blank"><strong>Explore Live Showcase →</strong></a>
+    <a href="https://ui.mirazahmed.com/" target="_blank"><strong>Explore Live Showcase →</strong></a>
   </p>
 
   <p align="center">
