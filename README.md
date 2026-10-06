@@ -52,20 +52,20 @@ The library includes 14+ handcrafted components organized into 5 categories:
 
 | Category | Component | Description | Dependencies |
 | :--- | :--- | :--- | :--- |
-| **Navigation** | [Stacking Navbar](https://mirazahmed-ui.vercel.app/components/stacking-navbar) | Pill navigation bar that fans out horizontally on hover with spring physics | `framer-motion`, `lucide-react` |
-| **Navigation** | [Dropdown Menu](https://mirazahmed-ui.vercel.app/components/dropdown-menu) | Animated dropdown menu with nested groups, icons, and keyboard shortcuts | `framer-motion`, `lucide-react` |
-| **Navigation** | [Animated Tabs](https://mirazahmed-ui.vercel.app/components/animated-tabs) | Sliding pill active tab indicator with Framer Motion layout springs | `framer-motion` |
-| **Navigation** | [Floating Action Menu](https://mirazahmed-ui.vercel.app/components/floating-action-menu) | Expandable speed-dial FAB button fanning out into secondary actions | `framer-motion`, `lucide-react` |
-| **Inputs** | [Input With Tags](https://mirazahmed-ui.vercel.app/components/input-with-tags) | Tag chip input with badge removal, keyboard shortcuts, and limit validation | `framer-motion`, `lucide-react` |
-| **Inputs** | [Cycle Status Button](https://mirazahmed-ui.vercel.app/components/cycle-status-button) | Button that cycles through workflow statuses with icon transitions | `framer-motion`, `lucide-react` |
-| **Inputs** | [Switch](https://mirazahmed-ui.vercel.app/components/switch) | Accessible toggle switch with spring thumb movement and icon indicators | `framer-motion`, `lucide-react` |
-| **Surfaces** | [Stacked Cards](https://mirazahmed-ui.vercel.app/components/stacked-cards) | Overlapping card deck with interactive hover peel and spring physics | `framer-motion`, `lucide-react` |
-| **Surfaces** | [Avatar Group](https://mirazahmed-ui.vercel.app/components/avatar-group) | Overlapping avatar stack with hover expand and overflow indicator | `framer-motion` |
-| **Media** | [Video Player](https://mirazahmed-ui.vercel.app/components/video-player) | Custom video player with custom scrubber, play/pause, volume, and fullscreen | `lucide-react` |
-| **Media** | [Audio Player](https://mirazahmed-ui.vercel.app/components/audio-player) | Compact audio player with progress track, duration timers, and volume slider | `lucide-react` |
-| **Feedback** | [Notification Popover](https://mirazahmed-ui.vercel.app/components/notification-popover) | Animated notification bell with unread badge and rich notification list | `framer-motion`, `lucide-react` |
-| **Feedback** | [Alert](https://mirazahmed-ui.vercel.app/components/alert) | Dismissible contextual alerts (info, success, warning, destructive) | `framer-motion`, `lucide-react` |
-| **Feedback** | [Word Loader](https://mirazahmed-ui.vercel.app/components/word-loader) | Rotating status text loader with vertical slide and blur-in transitions | `framer-motion` |
+| **Navigation** | [Stacking Navbar](https://ui.mirazahmed.com/components/stacking-navbar) | Pill navigation bar that fans out horizontally on hover with spring physics | `framer-motion`, `lucide-react` |
+| **Navigation** | [Dropdown Menu](https://ui.mirazahmed.com/components/dropdown-menu) | Animated dropdown menu with nested groups, icons, and keyboard shortcuts | `framer-motion`, `lucide-react` |
+| **Navigation** | [Animated Tabs](https://ui.mirazahmed.com/components/animated-tabs) | Sliding pill active tab indicator with Framer Motion layout springs | `framer-motion` |
+| **Navigation** | [Floating Action Menu](https://ui.mirazahmed.com/components/floating-action-menu) | Expandable speed-dial FAB button fanning out into secondary actions | `framer-motion`, `lucide-react` |
+| **Inputs** | [Input With Tags](https://ui.mirazahmed.com/components/input-with-tags) | Tag chip input with badge removal, keyboard shortcuts, and limit validation | `framer-motion`, `lucide-react` |
+| **Inputs** | [Cycle Status Button](https://ui.mirazahmed.com/components/cycle-status-button) | Button that cycles through workflow statuses with icon transitions | `framer-motion`, `lucide-react` |
+| **Inputs** | [Switch](https://ui.mirazahmed.com/components/switch) | Accessible toggle switch with spring thumb movement and icon indicators | `framer-motion`, `lucide-react` |
+| **Surfaces** | [Stacked Cards](https://ui.mirazahmed.com/components/stacked-cards) | Overlapping card deck with interactive hover peel and spring physics | `framer-motion`, `lucide-react` |
+| **Surfaces** | [Avatar Group](https://ui.mirazahmed.com/components/avatar-group) | Overlapping avatar stack with hover expand and overflow indicator | `framer-motion` |
+| **Media** | [Video Player](https://ui.mirazahmed.com/components/video-player) | Custom video player with custom scrubber, play/pause, volume, and fullscreen | `lucide-react` |
+| **Media** | [Audio Player](https://ui.mirazahmed.com/components/audio-player) | Compact audio player with progress track, duration timers, and volume slider | `lucide-react` |
+| **Feedback** | [Notification Popover](https://ui.mirazahmed.com/components/notification-popover) | Animated notification bell with unread badge and rich notification list | `framer-motion`, `lucide-react` |
+| **Feedback** | [Alert](https://ui.mirazahmed.com/components/alert) | Dismissible contextual alerts (info, success, warning, destructive) | `framer-motion`, `lucide-react` |
+| **Feedback** | [Word Loader](https://ui.mirazahmed.com/components/word-loader) | Rotating status text loader with vertical slide and blur-in transitions | `framer-motion` |
 
 ---
 
@@ -107,7 +107,7 @@ export function cn(...inputs: ClassValue[]) {
 
 ### 3. Copy & paste any component
 
-1. Browse the component gallery on [mirazahmed-ui.vercel.app](https://mirazahmed-ui.vercel.app) (or under `src/components/library/`).
+1. Browse the component gallery on [ui.mirazahmed.com](https://ui.mirazahmed.com/) (or under `src/components/library/`).
 2. Click **Copy** on the component code.
 3. Paste directly into your project (e.g. `components/ui/stacking-navbar.tsx`).
 
