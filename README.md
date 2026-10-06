@@ -26,9 +26,9 @@
 
 **mirazahmed/ui** is an interactive component registry and preview gallery. Instead of installing heavy, opinionated UI packages with hidden internals, browse live animated components, test responsive viewports in real time, and copy clean, accessible, type-safe code straight into your project.
 
-- 🌐 **Live Demo:** [mirazahmed-ui.vercel.app](https://mirazahmed-ui.vercel.app)
+- 🌐 **Live Demo:** [mirazahmed/ui.](https://ui.mirazahmed.com/)
 - 🧑‍💻 **Author:** [Miraz Ahmed](https://github.com/mirazahmeed)
-
+- 🌐 **Author Portfolio:** [mirazahmed.com](https://mirazahmed.com)
 ---
 
 ## ✨ Features
